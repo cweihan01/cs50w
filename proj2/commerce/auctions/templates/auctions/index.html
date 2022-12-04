@@ -1,0 +1,11 @@
+<!--
+    Homepage/Default route for auctions app.
+    Displays all active listings for user.
+ -->
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% include "auctions/base_table.html" with listings=active_listings %}
+{% endblock %}

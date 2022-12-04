@@ -1,0 +1,14 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h2>Following</h2>
+
+    {% include "network/post_layout.html" with posts=posts %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/like.js' %}"></script>
+{% endblock %}

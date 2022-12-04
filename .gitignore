@@ -1,0 +1,10 @@
+# Django settings
+**/settings.py
+
+# Django databases
+**/db.sqlite3
+
+# Django migrations
+**/migrations/**
+
+**/__pycache__/**

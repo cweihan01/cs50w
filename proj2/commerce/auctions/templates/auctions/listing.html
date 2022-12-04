@@ -1,0 +1,91 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ listing.title }}</h2>
+    <div>{{ listing.description }}</div>
+    
+    <h5>Details</h5>
+    <div>
+        <div>Created by: {{ listing.creator.username }}</div>
+        <div>Created on: {{ listing.created }}</div>
+        <div>Current price: {{ listing.current_price }}</div>
+        <div>Current bidder: {{ listing.current_bidder }}</div>
+        <div>Last updated on {{ listing.updated }}</div>
+    </div>
+    
+    <!-- Users who are not signed in can only view listing info -->
+    {% if request.user.is_anonymous %}
+        <a href="{% url 'login' %}">Login</a> to bid on this listing!
+
+    <!-- If listing is closed, no need to display forms -->
+    {% elif listing.is_closed %}
+        <div>Listing has closed.</div>
+        {% if listing.winner is None %}
+        <div>This listing was removed by the creator before anyone bid on it.</div>
+        <!-- Listing page can be accessed by winners, creators or others -->
+        {% elif request.user == listing.winner %}
+        <div>Congratulations, you have won this bid!</div>
+        {% elif request.user == listing.creator %}
+        <div>You have closed this listing.</div>
+        {% else %}
+        <div>Sorry, you did not win this bid.</div>
+        {% endif %}
+
+    <!-- Display forms for users who signed in on an open listing
+         close own listing, make bids, add to watchlist, add comments -->
+    {% else %}
+        <!-- Creators get to close their own listing if not yet won -->
+        {% if request.user == listing.creator %}
+            <form action="{% url 'listing' listing.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-sm btn-outline-dark btn-submit" id="closeListing" value="Close listing">
+                <small id="closeListingHelp" class="form-text text-muted">As the creator of this listing, you may close it at any time.</small>
+            </form>
+
+        <!-- Non-creators can bid on listings that are not yet won or add them to watchlist -->
+        {% else %}
+            <!-- Add item to watchlist -->
+            <form action="{% url 'watchlist' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="listing_id" value="{{ listing.id }}" hidden>
+                {% if request.user not in listing.watchers.all %}
+                    <button type="submit" class="btn btn-sm btn-outline-dark btn-submit" name="watchlist" value="add">Add item to watchlist</button>
+                {% else %}
+                    <button type="submit" class="btn btn-sm btn-outline-dark btn-submit" name="watchlist" value="remove">Remove item from watchlist</button>
+                {% endif %}
+            </form>
+
+            <!-- Make bid -->
+            <form action="{% url 'listing' listing.id %}" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn btn-sm btn-primary btn-submit" name="place_bid" value="Place bid">
+            </form>
+        {% endif %}
+    {% endif %}
+
+    <!-- Comment view -->
+    <h6>Comments</h6>
+    {% for comment in listing.comments.all %}
+        <div><b>{{ comment.commentor }}</b></div>
+        <div><i>{{ comment.comment }}</i></div>
+    {% empty %}
+        No comments yet.
+    {% endfor %}
+
+    {% if request.user.is_authenticated %}
+        <!-- All signed in users can add comments -->
+        <form action="{% url 'comment' listing.id %}" method="POST">
+            {% csrf_token %}
+            <!-- Error validation does not work, form has to rendered via template -->
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+            <div class="form-group">
+                <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Enter your comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary btn-submit" name="post_comment">Post comment</button>
+        </form>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+.post {
+    margin: 5px 0px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.post .post-user {
+    font-size: small;
+    font-style: italic;
+    font-weight: bold;
+    color: gray;
+}
+
+.post .post-datetime {
+    font-size: small;
+    color: gray;
+}
+/* 
+.post .post-likes {
+    font-size: small;
+} */
+
+.post .post-likes .post-heart {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.post .post-likes .post-likecount {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: small;
+}
+
+.post .post-likes .post-likedby {
+    font-size: small;
+}

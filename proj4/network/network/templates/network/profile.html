@@ -1,0 +1,36 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2 id="profileUsername">{{ profile.username }}</h2>
+
+    <div class="profile-follow">
+        <div>Followers: <span id="followersCount"></span></div>
+        <div>Following: <span id="followingCount"></span></div>
+
+        <!-- User can follow profile if logged in and not their own profile -->
+        {% if user.is_authenticated and user != profile %}
+            <!-- Button is handled by javascript -->
+            <button class="btn btn-sm btn-dark" id="followButton"></button>
+        {% endif %}
+
+    </div>
+    <hr>
+    <div class="profile-posts">
+        {% if user == profile %}
+            <h4>Your Posts</h4>
+        {% else %}
+            <h4>{{ profile.username }}'s Posts</h4>
+        {% endif %}
+
+        {% include "network/post_layout.html" with posts=posts %}
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'network/follow.js' %}"></script>
+    <script src="{% static 'network/edit.js' %}"></script>
+    <script src="{% static 'network/like.js' %}"></script>
+{% endblock %}

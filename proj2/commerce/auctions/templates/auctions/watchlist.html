@@ -1,0 +1,6 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Your Watchlist</h2>
+    {% include "auctions/base_table.html" with listings=watchlist %}
+{% endblock %}

@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    color: black;
+    margin: 15px;
+}
+
+.navbar {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.navbar-title {
+    float: left;
+    font-size: 20px;
+    color: #d93025;
+    height: 20px;
+}
+
+.navbar a {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.navbar a:link, .navbar a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: rgb(25, 79, 255);
+    text-decoration-line: underline;
+}
+
+.vertical-center {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.image-center {
+    margin: auto;
+}
+
+.crop {
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.searchbox {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 16px;
+    width: 500px;
+    font-size: 14px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    outline: none;
+}
+
+.submitbutton {
+    display: inline-block;
+    margin: 10px 3px;
+    padding: 10px 16px;
+    background-color: #dadadabb;
+    border: hidden;
+    border-radius: 6px;
+}
+
+.submitbutton:hover {
+    background-color: #9ecbf8;
+    cursor: pointer;
+}
+
+.formlabel {
+    display: inline-block;
+    font-size: 13px;
+    width: 12%;
+    min-width: 150px;
+    vertical-align: middle;
+}
+
+.searchbox-small {
+    display: inline-block;
+    margin: 4px;
+    padding: 4px 8px;
+    height: 25px;
+    width: 40%;
+    min-width: 250px;
+    font-size: 13px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    outline: none;
+    vertical-align: middle;
+}
+
+.horizontal-line {
+    border-top: 1px solid rgb(156, 156, 156);
+}

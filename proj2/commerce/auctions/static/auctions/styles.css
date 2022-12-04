@@ -1,0 +1,26 @@
+body {
+    padding: 10px;
+}
+
+/* Styles for create.html form */
+.form-group {
+    display: grid;
+    grid-template-columns: max-content;
+    padding-block-end: 10px;
+}
+
+.form-group .help-text {
+    font-size: 14px;
+    font-style: italic;
+}
+
+
+/* Styles for index.html displays */
+table thead {
+    font-weight: bold;
+}
+
+table td {
+    border: .5px solid black;
+    padding: 10px;
+}

@@ -1,0 +1,47 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ user.username }}'s profile</h2>
+
+    <h5>Your current bids:</h5>
+    <ul>
+        {% for listing in user.leading_bids.all %}
+            <li>{{ listing }}</li>
+        {% empty %}
+            No leading bids.
+        {% endfor %}
+    </ul>
+
+    <div>
+        <h5>Your wins:</h5>
+        <ul>
+            {% for listing in user.wins.all %}
+                <li>{{ listing }}</li>
+            {% empty %}
+                No wins...yet.
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h5>Your created listings:</h5>
+        <ul>
+            {% for listing in user.created_listings.all %}
+                <li>{{ listing }}</li>
+            {% empty %}
+                You did not create any listings.
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h5>History:</h5>
+        <ul>
+            {% for bid in user.bids.all %}
+                <li>{{ bid }}</li>
+            {% empty %}
+                No bids made.
+            {% endfor %}
+        </ul>
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<!--
+    Base table layout for displaying a list of listings.
+    Used by index and watchlist pages.
+-->
+
+<table>
+    <thead>
+        <td>Listing ID</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Image</td>
+        <td>Current Price</td>
+        <td>Category</td>
+        <td>Date listed</td>
+        <td>Date modified</td>
+        <td>Creator (username)</td>
+    </thead>
+    
+    <tbody>
+        {% for listing in listings %}
+            <tr>
+                <td>{{ listing.id }}</td>
+                <td>
+                    <a href="{% url 'listing' listing.id %}">
+                        {{ listing.title }}
+                    </a>
+                </td>
+                <td>{{ listing.description }}</td>
+                <td>{{ listing.image_url }}</td>
+                <td>{{ listing.current_price }}</td>
+                <td>{{ listing.category }}</td>
+                <td>{{ listing.created }}</td>
+                <td>{{ listing.updated }}</td>
+                <td>{{ listing.creator.username }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

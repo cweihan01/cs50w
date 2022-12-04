@@ -1,0 +1,35 @@
+{% for post in posts %}
+    <div class="container border post">
+        <div id="viewPost{{ post.id }}">
+            <h4 id="viewTitle{{ post.id }}">{{ post.title }}</h4>
+            <p id="viewContents{{ post.id }}">{{ post.contents }}</p>
+            <div class="post-likes">
+                <span class="post-heart" id="likeHeart{{ post.id }}" data-id="{{ post.id }}"></span>
+                <span class="post-likecount" id="likeCount{{ post.id }}"></span>
+                <div class="post-likedby" id="likeBy{{ post.id }}" style="display: none;">
+                    Liked by: <span id="likeUsers{{ post.id }}"></span>
+                </div>
+            </div>
+            <div class="post-user">{{ post.user.username }}</div>
+            <div class="post-datetime">Created: {{ post.created }}</div>
+            <div class="post-datetime">Edited: <span id="viewModified{{ post.id }}">{{ post.modified }}</span></div>
+            {% if post.user == user %}
+                <!-- shd this be a button -->
+                <button class="btn btn-dark btn-sm edit-buttons" id="editButton{{ post.id }}" data-id="{{ post.id }}">Edit</button>
+            {% endif %}
+        </div>
+
+        <!-- Is there a better way to do this than to render this for every element
+        But I also don't want to put this whole chunk of code into javascript -->
+        <form id="editPost{{ post.id }}" style="display: none;">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" id="editTitle{{ post.id }}">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="editContents{{ post.id }}" rows=10></textarea>
+            </div>
+            <input class="btn btn-primary btn-sm" type="submit" id="submitButton{{ post.id }}" value="Edit Post">
+        </form>
+    </div>
+{% endfor %}
